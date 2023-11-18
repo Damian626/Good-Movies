@@ -1,0 +1,119 @@
+<!-- MainContent -->
+<section class="m-profile setting-wrapper">        
+    <div class="container">
+       <h4 class="main-title mb-4">Cuenta</h4>
+       <div class="row">
+             <div class="col-lg-4 mb-3">
+                <div class="sign-user_card text-center">
+                   <img src="/assets/images/user/user.jpg" class="rounded-circle img-fluid d-block mx-auto mb-3" alt="user" loading="lazy">
+                   <h4 class="mb-3">{{ user.full_name }}</h4>
+                
+                </div>
+             </div>
+             <div class="col-lg-8">
+                <div class="sign-user_card" *ngIf="USER_AUTH && !IS_UPDATE_PROFILE">
+                   <h5 class="mb-3 pb-3 a-border">Datos</h5>
+                   <div class="row align-items-center justify-content-between mb-3">
+                         <div class="col-md-8">
+                            <span class="text-light font-size-13">Email</span>
+                            <p class="mb-0">{{ USER_AUTH.email }}</p>
+                         </div>   
+                         <div class="col-md-4 text-md-right text-left">                      
+                            <a href="#" onclick="return false;" (click)="openProfile()" class="text-primary">Editar</a>
+                         </div>
+                   </div>
+                   <div class="row align-items-center justify-content-between mb-3">
+                        
+                        
+                   </div>
+                   <div class="row align-items-center justify-content-between mb-3">
+                         <div class="col-md-8">
+                            <span class="text-light font-size-13">Fecha de nacimiento</span>
+                            <p class="mb-0">{{ USER_AUTH.date_birth ? USER_AUTH.date_birth : '' }}</p>
+                         </div>
+                         <div class="col-md-4 text-md-right text-left">
+                            <a href="#" onclick="return false;" (click)="openProfile()" class="text-primary">Editar</a>
+                         </div>
+                   </div>
+               
+                 
+                   <div class="row justify-content-between mb-3">
+                         <div class="col-md-8 r-mb-15">
+                            
+                            <a href="#" onclick="return false;" class="btn btn-hover" (click)="cancelSubcription()">Cancelar Subcripción</a>
+                         </div>
+                       
+
+                         <div class="col-12" *ngIf="IS_WANT_CANCELLED">
+                            <label for="">Razon de la cancelación</label>
+                            <textarea name="reason" [(ngModel)]="reason" id="" cols="30" rows="10"></textarea>
+                         </div>
+                         <div class="col-12" *ngIf="IS_WANT_CANCELLED">
+                            <a href="#" onclick="return false;" class="btn btn-hover" (click)="cancel()">Aceptar Cancelación</a>
+                            <a href="#"  onclick="return false;" (click)="cancelSubcription()" class="btn btn-link">Cancelar</a>
+                         </div>
+                   </div>
+                   <h5 class="mb-3 mt-4 pb-3 a-border">Tipo de Plan</h5>
+                   <div class="row justify-content-between mb-3">
+                         <div class="col-md-8">
+                            <p>{{ user.subcription.name_plan }}</p>                                
+                         </div>
+                         <div class="col-md-4 text-md-right text-left">
+                           
+                         </div>
+                   </div>
+                  
+                </div>
+                <div class="sign-user_card" *ngIf="USER_AUTH && IS_UPDATE_PROFILE">
+                    <div class="profile-from">
+                        <h4 class="mb-3">Editar Datos</h4>
+                        <form class="mt-4">
+                              <div class="form-group">
+                                 <label>Nombre</label>
+                                 <input type="text" name="name" [(ngModel)]="name" class="form-control mb-0" id=""
+                                    placeholder="Enter Your Name" autocomplete="off" required>
+                              </div>
+
+                              <div class="form-group">
+                                <label>Apellido</label>
+                                <input type="text" name="surname" [(ngModel)]="surname" class="form-control mb-0" id=""
+                                   placeholder="Enter Your Surname" autocomplete="off" required>
+                             </div>
+
+                             <div class="form-group">
+                                <label>Email</label>
+                                <input type="email" name="email" [(ngModel)]="email" class="form-control mb-0" id=""
+                                   placeholder="Enter Your Email" autocomplete="off" required>
+                             </div>
+
+                              <div class="form-group">
+                                 <label>Fecha de Nacimiento</label>
+                                 <input type="date" name="date_birth" [(ngModel)]="date_birth" class="form-control date-input basicFlatpickr mb-0" placeholder="Select Date" id=""
+                                 required>
+                              </div>
+                              
+                              <div class="d-flex">
+                                 <a href="#" onclick="return false;" (click)="updateProfile()" class="btn btn-hover">Actualizar</a>
+                                 <a href="#"  onclick="return false;" (click)="openProfile()" class="btn btn-link">Cancelar</a>
+                              </div>
+                        </form>
+                    </div>
+                </div>
+             </div>
+       </div>
+    </div>
+ </section>
+
+ <div class="rtl-box">
+    <button type="button" class="btn btn-light rtl-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" width="30px" height="30px" viewBox="0 0 20 20" fill="white">
+        <path fill-rule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd" />
+        </svg>
+    </button>
+    <div class="rtl-panel">
+        <ul class="modes">
+        <li class="dir-btn"  data-mode="rtl" data-active="false" data-value="ltr"><a href="#">Derecha</a></li>
+        <li class="dir-btn" data-mode="rtl" data-active="true"   data-value="rtl"><a href="#">Izquierda</a></li>
+        </ul>
+    </div>
+</div>

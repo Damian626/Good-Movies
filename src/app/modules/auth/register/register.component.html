@@ -1,0 +1,198 @@
+<!-- MainContent -->
+<div class="sign-in-page" [ngClass]="{'d-block': !SigInUp,'d-none': SigInUp}" >
+    <div class="container">
+       <div class="row justify-content-center align-items-center height-self-center">
+          <div class="col-lg-7 col-md-12 align-self-center">
+             <div class="sign-user_card ">                    
+                <div class="sign-in-page-data">
+                   <div class="sign-in-from w-100 m-auto">
+                      <form class="" action="#">
+                         <div class="row">
+                            <div class="col-md-6">
+                               <div class="form-group">
+                                  <label>Nombres: </label>
+                                  <input type="text" name="name" [(ngModel)]="name" class="form-control mb-0" id="exampleInputEmail23" placeholder="nombre" autocomplete="off" required>
+                               </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                   <label>Apellidos: </label>
+                                   <input type="text" name="surname" [(ngModel)]="surname" class="form-control mb-0" id="exampleInputEmail21" placeholder="apellido" autocomplete="off" required>
+                                </div>
+                             </div>
+
+                            <div class="col-md-6">
+                               <div class="form-group">  
+                                  <label>E-mail</label>                               
+                                  <input type="email"  name="email" [(ngModel)]="email" class="form-control mb-0" id="exampleInputEmail35" placeholder="email" autocomplete="off" required>
+                               </div>
+                            </div>
+
+                            <div class="col-md-6">
+                               <div class="form-group">   
+                                  <label>Contraseña</label>                              
+                                  <input type="password"  name="password" [(ngModel)]="password" class="form-control mb-0" id="exampleInputPassword2" placeholder="contraseña" required>
+                               </div>
+                            </div>
+                            <div class="col-md-6">
+                               <div class="form-group"> 
+                                  <label>Repita la contraseña</label>                                
+                                  <input type="password" name="password_confirmation" [(ngModel)]="password_confirmation" class="form-control mb-0" id="exampleInputPassword3" placeholder="contraseña" required>
+                               </div>
+                            </div>
+                            
+                         </div>
+                         <!-- <div class="custom-control custom-radio mt-2">
+                            <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input">
+                            <label class="custom-control-label" for="customRadio1">Premium-$39 / 3 Months
+                               with a 5 day free trial</label>
+                         </div>
+                         <div class="custom-control custom-radio mt-2">
+                            <input type="radio" id="customRadio2" name="customRadio" class="custom-control-input">
+                            <label class="custom-control-label" for="customRadio2"> Basic- $19 / 1 Month</label>
+                         </div>
+                         <div class="custom-control custom-radio mt-2">
+                            <input type="radio" id="customRadio3" name="customRadio" class="custom-control-input">
+                            <label class="custom-control-label" for="customRadio3">Free-Free</label>
+                         </div> -->
+                      
+                         <button type="button" (click)="SignUp()" class="btn btn-hover my-2">Registrarse</button>
+                                                             
+                      </form>
+                   </div>
+                </div>    
+                <div class="mt-3">
+                   <div class="d-flex justify-content-center links">
+                     ¿Ya tienes cuenta? <a href="/auth/login" class="text-primary ml-2">Inicia Sesión</a>
+                   </div>                        
+                </div>
+             </div>
+          </div>
+       </div>
+    </div>
+ </div>
+
+ <!-- Main container  -->  
+ <main id="main" class="site-main"  [ngClass]="{'d-block': SigInUp,'d-none': !SigInUp}">
+    <div class="container">
+       <div class="row">
+       <div class="col-lg-12 col-sm-12">
+          <div class="iq-pricing-card">
+             <div class="table-responsive iq-pricing pt-2">
+                   <table id="my-table" class="table" data-active="premium">
+                      <thead>
+                         <tr>
+                               <th class="text-center iq-price-head">
+                               </th>
+                               <ng-container *ngFor="let PLAN of PLANS">
+
+                                   <th class="text-center iq-price-head premium" *ngIf="PLAN.name == 'PREMIUM'">
+                                      <div class="iq-price-box active">
+                                         <div class="iq-price-rate text-white  d-flex align-items-end justify-content-center flex-wrap" >
+                                            <div class="mr-2 h3">${{ PLAN.precio_mensual }}</div><small> / Mes</small></div>
+                                            <div class="iq-price-rate text-white  d-flex align-items-end justify-content-center flex-wrap" >
+                                                <div class="mr-2 h3">${{ PLAN.precio_anual }}</div><small> / Anual</small></div>
+                                         <span class="type">{{ PLAN.name }}</span>
+                                      </div>
+                                   </th>
+
+                                   <th class="text-center iq-price-head basic" *ngIf="PLAN.name != 'PREMIUM'">
+                                      <div class="iq-price-box">
+                                         <div class="iq-price-rate text-white d-flex align-items-end justify-content-center flex-wrap" >
+                                            <div class="mr-2 h3">${{ PLAN.precio_mensual }}</div>
+                                            <small> / Mes</small></div>
+                                        <div class="iq-price-rate text-white d-flex align-items-end justify-content-center flex-wrap" >
+                                                <div class="mr-2 h3">${{ PLAN.precio_anual }}</div>
+                                                <small> / Anual</small></div>
+                                         <span class="type">{{ PLAN.name }}</span>
+                                      </div>
+                                   </th>
+
+                               </ng-container>
+                               
+                            </tr>
+                      </thead>
+                      <tbody>                
+                        <tr>
+                           <th class="text-center" scope="row">Prueba gratuita</th>
+                           <td class="text-center iq-child-cell">
+                              <i class="fa fa-check-circle"></i>
+                           </td>
+                           <td class="text-center iq-child-cell active">
+                              <i class="fa fa-check-circle"></i>
+                           </td>
+                           <td class="text-center iq-child-cell">
+                              <i class="fa fa-check-circle"></i>
+                           </td>
+                        </tr>
+                        <tr>
+                           <th class="text-center" scope="row">Películas</th>
+                           <td class="text-center iq-child-cell">
+                              <i class="fa fa-check-circle"></i>
+                           </td>
+                           <td class="text-center iq-child-cell active">
+                              <i class="fa fa-check-circle"></i>
+                           </td>
+                           <td class="text-center iq-child-cell">
+                              <i class="fa fa-check-circle"></i>
+                           </td>
+                        </tr>
+                        <tr>
+                           <th class="text-center" scope="row">Series</th>
+                           <td class="text-center iq-child-cell">
+                              <i class="fa fa-times-circle"></i>
+                           </td>
+                           <td class="text-center iq-child-cell active">
+                              <i class="fa fa-check-circle"></i>
+                           </td>
+                           <td class="text-center iq-child-cell">
+                              <i class="fa fa-check-circle"></i>
+                           </td>
+                        </tr>
+                        <tr>
+                           <th class="text-center" scope="row">Videos</th>
+                           <td class="text-center iq-child-cell">
+                              <i class="fa fa-times-circle"></i>
+                           </td>
+                           <td class="text-center iq-child-cell active">
+                              <i class="fa fa-times-circle"></i>
+                           </td>
+                           <td class="text-center iq-child-cell">
+                              <i class="fa fa-check-circle"></i>
+                           </td>
+                        </tr>
+                         <tr>
+                            <th class="text-center iq-price-footer"></th>
+
+                            <ng-container *ngFor="let PLAN of PLANS">
+                                <td class="text-center iq-price-footer" [ngClass]="{'active': PLAN.name == 'PREMIUM'}">
+                                   <div class="align-items-center d-flex r-mb-23" data-animation-in="fadeInUp" data-delay-in="1.3">
+                                      <a href="#" onclick="return false;" (click)="selectedPlanMonth(PLAN)" class="btn btn-hover iq-button mx-1">Subs. MENSUAL</a>
+                                      <a href="#" onclick="return false;" (click)="selectedPlanAnual(PLAN)" class="btn btn-hover iq-button mx-1">Subs. ANUAL</a>
+                                   </div>
+                                </td>
+                            </ng-container>
+                            
+                            
+                         </tr>
+                         <tr>
+                            <th class="text-center iq-price-footer"></th>
+                            <td class="text-center iq-price-footer">
+                                
+                            </td>
+                            <td class="text-center iq-price-footer active">
+                                <div #paypal ></div>
+                            </td>
+                            <td class="text-center iq-price-footer">
+                               
+                            </td>
+                         </tr>
+                      </tbody>
+                   </table>
+             </div>
+             </div>
+          </div>
+       </div>   
+    </div>
+ </main>
+   <!-- Main container end -->

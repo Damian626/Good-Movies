@@ -1,0 +1,354 @@
+<!-- MainContent -->
+<div class="main-content" *ngIf="STREAMING_SELECTED">
+    <div class="show-movie">
+       <div class="container-fluid">
+          <div class="banner-wrapper overlay-wrapper iq-main-slider " *ngIf="!SHOW_CONTENT" [ngStyle]="{'background-image': 'url('+STREAMING_SELECTED.imagen+')'}">
+             <div class="banner-caption">
+                <div class="movie-detail">
+                   <div class="row">
+                      <div class="col-lg-12">
+                         <div class="trending-info p-0">
+                            <h1 class="trending-text big-title text-uppercase mt-0">{{ STREAMING_SELECTED.title }}</h1>
+                            <div class="slider-ratting d-flex align-items-center" data-animation-in="fadeInLeft">
+                               <ul
+                                  class="ratting-start p-0 m-0 list-inline text-primary d-flex align-items-center justify-content-left">
+                                  <li>
+                                     <i class="fa fa-star" aria-hidden="true"></i>
+                                  </li>
+                                  <li>
+                                     <i class="fa fa-star" aria-hidden="true"></i>
+                                  </li>
+                                  <li>
+                                     <i class="fa fa-star" aria-hidden="true"></i>
+                                  </li>
+                                  <!-- <li>
+                                     <i class="fa fa-star-half" aria-hidden="true"></i>
+                                  </li> -->
+                                  <li>
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                 </li>
+                                 <li>
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                 </li>
+                               </ul>
+                               <span class="text-white ml-3">{{ STREAMING_SELECTED.avg_reviews }} (imdb)</span>
+                            </div>
+                            <ul class="p-0 mt-2 list-inline d-flex flex-wrap movie-content">
+                                <li class="trending-list"><a class="text-primary title" href="#" onclick="return false;">{{ STREAMING_SELECTED.genre.title }}</a></li>
+                         </ul>
+                            <div class="d-flex flex-wrap align-items-center text-white text-detail sesson-date">
+                               <ng-container *ngIf="STREAMING_SELECTED.type == 2">
+                                <span class="">
+                                    ({{ STREAMING_SELECTED.seasons.length }} Seasons) </span>
+                               </ng-container>
+
+                               <ng-container *ngIf="STREAMING_SELECTED.type != 2">
+                                   <span class="">
+                                     Película</span>
+                               </ng-container>
+                               
+
+                               <span class="trending-year">{{ STREAMING_SELECTED.created_format }}</span>
+                            </div>
+                            <div class="trending-dec">
+                               <p class="m-0">{{ STREAMING_SELECTED.description }}</p>
+                            </div>
+                         </div>
+                      </div>
+                   </div>
+                </div>
+                <div class="position-relative">
+                   <a href="#" onclick="return false"
+                      class="d-flex align-items-center" (click)="showContent()">
+                      <div class="play-button">
+                         <i class="ri-play-fill"></i>
+                      </div>
+                      <h4 class="w-name text-white font-weight-700" *ngIf="STREAMING_SELECTED.type == 2">Reproducir</h4>
+                      <h4 class="w-name text-white font-weight-700" *ngIf="STREAMING_SELECTED.type != 2">Ver ahora</h4>
+                   </a>
+                </div>
+                <div class="row">
+                   <div class="col-12 mt-auto mb-auto">
+                      <ul class="list-inline p-0 m-0 share-icons music-play-lists">
+                         <li class="share mb-0">
+                            <span><i class="ri-share-fill"></i></span>
+                            <div class="share-box">
+                               <div class="d-flex align-items-center">
+                                  <a href="#" class="share-ico"><i class="ri-facebook-fill"></i></a>
+                              
+                               </div>
+                            </div>
+                         </li>
+                       
+                      </ul>
+                      <ul
+                         class="p-0 list-inline d-flex flex-wrap align-items-center movie-content movie-space-action flex-wrap iq_tag-list">
+                         <li class="text-primary text-lable"><i class="fa fa-tags font-Weight-900"
+                               aria-hidden="true"></i>TAGS:</li>
+                               <ng-container *ngFor="let tags_multi of STREAMING_SELECTED.tags_multiples">
+                                   <li> <a class="tag-list" href="#" onclick="return false;">{{ tags_multi.title }},</a>
+                                   </li>
+                               </ng-container>
+                         
+                      </ul>
+                   </div>
+                </div>
+             </div>
+             <div class="trailor-video  text-sm-right p-3  col-md-3 col-12">
+                <a [href]="STREAMING_SELECTED.vimeo_id"
+                   class="video-open playbtn block-images position-relative playbtn_thumbnail ">
+                   <img width="1920" height="1080" [src]="STREAMING_SELECTED.imagen"
+                      class="attachment-medium-large size-medium-large wp-post-image" alt=""  loading="lazy"> <span class="content btn btn-transparant iq-button">
+                      <i class=" mr-2"></i>
+                      <span>Ver Trailer</span>
+                   </span>
+                </a>
+             </div>
+          </div>
+
+          <section class="iq-main-slider site-video" *ngIf="SHOW_CONTENT">
+            <div class="container-fluid">
+               <div class="row">
+                  <div class="col-lg-12">
+                     <div class="pt-0">
+                        <iframe [src]="urlGetVideoContenido()" 
+                        frameborder="0" style="width: 1720px !important;
+                        height: 350px;" allow="autoplay; fullscreen" allowfullscreen></iframe>
+                     </div>
+      
+                  </div>
+               </div>
+            </div>
+         </section>
+
+         <div class="trending-info mt-4 pt-0 pb-4" *ngIf="SHOW_CONTENT">
+            <div class="row">
+               <div class="col-md-9 col-12  mb-auto">
+                  <div class="d-md-flex">
+                     <h3 class="trending-text big-title text-uppercase mt-0 fadeInLeft animated"
+                        data-animation-in="fadeInLeft" data-delay-in="0.6"
+                        style="opacity: 1; animation-delay: 0.6s">{{ SHOW_CONTENT.title }}
+                     </h3>
+                     <div class="slider-ratting d-flex align-items-center ml-md-3 ml-0">
+                        <ul
+                           class="ratting-start p-0 m-0 list-inline text-primary d-flex align-items-center justify-content-left">
+                           <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                           <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                           <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                           <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                           <li><i class="fa fa-star-half" aria-hidden="true"></i></li>
+                        </ul>
+                        <span class="text-white ml-2">3.5 (lmdb)</span>
+                     </div>
+                  </div>
+                  <ul class="p-0 mt-2 list-inline d-flex flex-wrap movie-content">
+                     <li class="trending-list"><a class="text-primary title"
+                           href="tags/thriller.html">Thriller</a></li>
+                  </ul>
+                  <div class="d-flex flex-wrap align-items-center text-white text-detail flex-wrap mb-4">
+                     <span class="badge badge-secondary font-size-16">G</span>
+                     <span class="ml-3 font-Weight-500 genres-info">{{ SHOW_CONTENT.cal_total_time }}</span>
+                     <span class="trending-year trending-year-list font-Weight-500 genres-info">{{ SHOW_CONTENT.created_format }}
+                     </span>
+                     <span
+                        class="trending-year trending-year-list single-view-count font-Weight-500 genres-info"><i
+                           class="fa fa-eye"></i>1449 views</span>
+                  </div>
+                  <ul class="list-inline p-0 m-0 share-icons music-play-lists mb-1">
+                     <li class="share">
+                        <span><i class="ri-share-fill"></i></span>
+                        <div class="share-box">
+                           <div class="d-flex align-items-center">
+                              <a href="#" class="share-ico"><i class="ri-facebook-fill"></i></a>
+                              <a href="#" class="share-ico"><i class="ri-twitter-fill"></i></a>
+                              <a href="#" class="share-ico"><i class="ri-links-fill"></i></a>
+                           </div>
+                        </div>
+                     </li>
+                     <li><span><i class="ri-heart-fill"></i></span></li>
+                     <li><span><i class="ri-add-line"></i></span></li>
+                  </ul>
+                  <ul class="p-0 list-inline d-flex flex-wrap align-items-center mb-3 mt-4 iq_tag-list">
+                     <li class="text-primary text-lable mr-3"><i class="fa fa-tags" aria-hidden="true"></i>Tags:
+                     </li>
+                     <ng-container *ngFor="let tags_multi of STREAMING_SELECTED.tags_multiples">
+                        <li class="trending-list mr-3"><a class="title" href="#" onclick="return false;">{{ tags_multi.title }},</a></li>
+                     </ng-container>
+                     
+                     
+                  </ul>
+               </div>
+               <div class="trailor-video col-md-3 col-12 mt-lg-0 mt-4 mb-md-0 mb-1 text-lg-right">
+                  
+ 
+                  <a [href]="STREAMING_SELECTED.vimeo_id"
+                     class="video-open playbtn block-images position-relative playbtn_thumbnail">
+                     <img width="1920" height="1080" [src]="SHOW_CONTENT.imagen"
+                        class="attachment-medium-large size-medium-large wp-post-image" alt="" loading="lazy"
+                        sizes="(min-width: 960px) 75vw, 100vw" />
+                     <span class="content btn btn-transparant iq-button">
+                        <i class="fa fa-play mr-2"></i>
+                        <span>Trailer Link</span>
+                     </span>
+                  </a>
+               </div>
+            </div>
+         </div>
+
+          <section class="show-movie-section" *ngIf="STREAMING_SELECTED.type == 2">
+             <div class="d-inline-block">
+                <select name="cars" class="form-control season-select" (change)="changeSeason($event.target)">
+                   
+                   <ng-container *ngFor="let season of STREAMING_SELECTED.seasons;let i=index">
+                     <option [value]="season.id">{{ season.title }}</option>
+                  </ng-container>
+                  
+                   
+                </select>
+             </div>
+             <div class="trending-custom-tab">
+                <div class="tab-title-info position-relative">
+                   <ul class="trending-pills nav nav-pills text-center iq-ltr-direction" role="tablist">
+                      <li class="nav-item">
+                         <a class="nav-link active show m-0" data-toggle="pill" href="#episodes" role="tab"
+                            aria-selected="true">Capítulos</a>
+                      </li>
+                   </ul>
+                </div>
+                <div class="tab-content" id="nav-tabContent">
+                   <div id="episodes" class=" tab-pane animated fadeInUp active show">
+                      <div class="row episodes list-inline p-0 mb-0 iq-rtl-direction " *ngIf="SEASON_SELECTED">
+
+                        <ng-container *ngFor="let episode of SEASON_SELECTED.episodes;let i=index">
+                           <div class="e-item col-lg-3 col-sm-12 col-md-6">
+                              <div class="block-image position-relative">
+                                 <a href="#" onclick="return false;" (click)="showContent(episode)">
+                                    <img [src]="episode.imagen" style="height: 227px;width: 404px;object-fit: cover;" class="img-fluid img-zoom" alt="" loading="lazy">
+                                 </a>
+                                 <div class="episode-number">S{{ INDEX_SEASON >= 9 ? INDEX_SEASON + 1 : "0"+(INDEX_SEASON+1) }}E{{ (i +1) >= 9 ? (i +1) : "0"+(i +1)  }}</div>
+                                 <div class="episode-play-info">
+                                    <div class="episode-play">
+                                       <a
+                                          href="#" onclick="return false;" (click)="showContent(episode)">
+                                          <i class="ri-play-fill"></i>
+                                       </a>
+                                    </div>
+                                 </div>
+                              </div>
+                              <div class="epi-desc p-3">
+                                 <div class="d-flex align-items-center justify-content-between mb-3">
+                                    <span class="text-white rel-date">{{ episode.created_format }}</span>
+                                    <span class="text-primary run-time"> {{ episode.cal_total_time }}</span>
+                                 </div>
+                                 <a
+                                    href="#" onclick="return false;" (click)="showContent(episode)">
+                                    <h5 class="epi-name text-white mb-0">
+                                       {{ episode.title }}</h5>
+                                 </a>
+                              </div>
+                           </div>
+                        </ng-container>
+                        
+
+                         
+                      </div>
+                   </div>
+                   
+                </div>
+             </div>
+          </section>
+          
+          <div id="reviews" class="streamit-reviews" *ngIf="STREAMING_SELECTED && !IS_HAVE_REVIEW">
+            <div id="comments" class="comments-area validate-form">
+            </div>
+            <div id="review_form_wrapper">
+               <div id="review_form">
+                  <div id="respond" class="comment-respond">
+                     <h3 id="reply-title" class="comment-reply-title mt-0">
+                      ¿Qué opinas de “{{ STREAMING_SELECTED.title }}” ?
+                     </h3>
+                     <form class="comment-form">
+                        
+                        <div class="comment-form-rating">
+                           <label for="rating">Puntaje</label>
+                           <div class="star ml-3">
+                              <span><i class="fa fa-star mx-2" [ngClass]="{'selected-start': RATING >= 1}" (click)="selectedRating(1)" style="font-size: xx-large;cursor: pointer;"></i></span>
+                              <span><i class="fa fa-star mx-2" [ngClass]="{'selected-start': RATING >= 2}" (click)="selectedRating(2)" style="font-size: xx-large;cursor: pointer;"></i></span>
+                              <span><i class="fa fa-star mx-2" [ngClass]="{'selected-start': RATING >= 3}" (click)="selectedRating(3)" style="font-size: xx-large;cursor: pointer;"></i></span>
+                              <span><i class="fa fa-star mx-2" [ngClass]="{'selected-start': RATING >= 4}" (click)="selectedRating(4)" style="font-size: xx-large;cursor: pointer;"></i></span>
+                              <span><i class="fa fa-star mx-2" [ngClass]="{'selected-start': RATING >= 5}" (click)="selectedRating(5)" style="font-size: xx-large;cursor: pointer;"></i></span>
+                           </div>
+                        </div>
+                        <p class="comment-form-comment p-0 mb-3 mt-0">
+                           <label for="comment">deja tu comentario&nbsp;<span
+                                 class="required">*</span></label>
+                                 <textarea id="comment" name="DESCRIPTION_REVIEW"
+                              cols="45" rows="8" [(ngModel)]="DESCRIPTION_REVIEW"></textarea>
+                        </p>
+                        
+                        
+                        <p class="form-submit">
+                           <button type="button" id="submit"
+                              class="btn btn-hover iq-button" (click)="saveReview()">
+                              <span><i class="ri-play-fill"></i>Agregar comentario</span>
+                           </button>
+                        </p>
+                     </form>
+                  </div>
+               </div>
+            </div>
+            <div class="clear"></div>
+         </div>
+
+          <div id="iq-favorites" class="s-margin detail-cast-list iq-rtl-direction mt-0 starring">
+             <div class="row m-0">
+                <div class="col-sm-12 overflow-hidden p-0">
+                   <div class="iq-main-header d-flex align-items-center justify-content-between iq-ltr-direction">
+                      <h4 class="main-title">Actores</h4>
+                   </div>
+                   <div class="favorites-contens iq-smovie-slider">
+                      <ul class="inner-slider list-inline row p-0  iq-ltr-direction">
+                        <ng-container *ngFor="let actor of STREAMING_SELECTED.actors">
+                           <li class=" slide-item iq-ltr-direction col-xl-3 col-lg-4 col-md-4 col-6">
+                              <div class="cast-images position-relative row mx-0">
+                                 <div class="col-sm-4 col-12 img-box p-0">
+                                       <img [src]="actor.imagen" class="person__poster--image img-fluid" alt="image" loading="lazy">
+                                 </div>
+                                 <div class="col-sm-8 col-12 block-description starring-desc ">
+                                       <h6 class="iq-title">
+                                          <a href="cast-karen-gilchrist.html" tabindex="0">
+                                             {{ actor.full_name }} </a>
+                                       </h6>
+                                       <div class="video-time d-flex align-items-center my-2">
+                                          <span class="text-white">{{ actor.profesion }}</span>
+                                       </div>
+                                 </div>
+                              </div>
+                           </li>
+                        </ng-container>
+                        
+                            
+                            
+                      </ul>
+                   </div>
+                </div>
+             </div>
+          </div>
+       </div>
+    </div>
+ </div>
+ <div class="rtl-box">
+    <button type="button" id="flip" class="btn btn-light rtl-btn">
+       <svg xmlns="http://www.w3.org/2000/svg" width="30px" height="30px" viewBox="0 0 20 20" fill="white">
+          <path fill-rule="evenodd"
+             d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z"
+             clip-rule="evenodd" />
+       </svg>
+    </button>
+    <div class="rtl-panel" id="panel">
+       <ul class="modes">
+          <li class="dir-btn" data-mode="rtl" data-active="false" data-value="ltr"><a href="#">LTR</a></li>
+          <li class="dir-btn" data-mode="rtl" data-active="true" data-value="rtl"><a href="#">RTL</a></li>
+       </ul>
+    </div>
+ </div>
